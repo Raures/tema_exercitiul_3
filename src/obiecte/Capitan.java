@@ -1,71 +1,72 @@
 package obiecte;
+import exceptii.ExceptieCapitan;
 
 public class Capitan {
 
     String nume;
     String prenume;
-    int varsta; // minim 18
+    int varsta; // Minim 18.
     String contract;
 
-    public Capitan(String nume_, String prenume_, int varsta_, String contract_) {
-        if(nume_.matches("^[a-zA-Z0-9]*$")) {
+    public Capitan(String nume_, String prenume_, int varsta_, String contract_) throws ExceptieCapitan {
+        if(nume_.matches("^[a-zA-Z]*$")) {
             setNume(nume_);
         }
         else {
-            System.out.println("Numele poate sa contina doar litere!");
+            throw new ExceptieCapitan(nume_ + " nu este permis! Numele Capitanului poate contine numai litere.");
         }
 
-        if(prenume_.matches("^[a-zA-Z0-9]*$")) {
+        if(prenume_.matches("^[a-zA-Z]*$")) {
             setPrenume(prenume_);
         }
         else {
-            System.out.println("Prenumele poate sa contina doar litere!");
+            throw new ExceptieCapitan(prenume_ + " nu este permis! Prenumele Capitanului poate contine numai litere.");
         }
 
-        if(varsta_ > 18) {
+        if(varsta_ > 17) {
             setVarsta(varsta_);
         }
         else {
-            System.out.println("Varsta trebuie sa fie mai mare de 18 ani!");
+            throw new ExceptieCapitan("Varsta Capitanului nu poate fi " + varsta_ + ", fiind mai mica de 18!");
         }
 
         if(contract_.matches("\\d\\d\\.\\d\\d.\\d\\d\\d\\d-\\d\\d.\\d\\d.\\d\\d\\d\\d")) {
             setContract(contract_);
         }
         else {
-            System.out.println("Data trebuie sa respecte formatul ZZ.LL.AAAA-ZZ.LL.AAAA!");
+            throw new ExceptieCapitan(contract_ + " nu respecta formatul ZZ.LL.AAAA-ZZ.LL.AAAA!");
         }
     }
 
-    void setNume(String valoare) {
+    public void setNume(String valoare) {
         nume = valoare;
     }
 
-    String getNume() {
+    public String getNume() {
         return nume;
     }
 
-    void setPrenume(String valoare) {
+    public void setPrenume(String valoare) {
         prenume = valoare;
     }
 
-    String getPrenume() {
+    public String getPrenume() {
         return prenume;
     }
 
-    void setVarsta(int valoare) {
+    public void setVarsta(int valoare) {
         varsta = valoare;
     }
 
-    int getVarsta() {
+    public int getVarsta() {
         return varsta;
     }
 
-    void setContract(String valoare) {
+    public void setContract(String valoare) {
         contract = valoare;
     }
 
-    String getContract() {
+    public String getContract() {
         return contract;
     }
 

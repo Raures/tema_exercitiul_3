@@ -1,4 +1,5 @@
 package obiecte;
+import exceptii.ExceptieNavaDeRazboi;
 
 import java.util.List;
 
@@ -7,34 +8,26 @@ public class NavaDeRazboi {
     String nume;
     Locatie locatie;
     List<Capitan> capitani;
-    boolean validare = true;
 
-    public NavaDeRazboi(String nume_, Locatie locatie_, List<Capitan> capitani_) {
-        setNume(nume_);
-
-        if(locatie_ instanceof Locatie) {
-            setLocatie(locatie_);
+    public NavaDeRazboi(String nume_, Locatie locatie_, List<Capitan> capitani_) throws ExceptieNavaDeRazboi {
+        if (nume_.isEmpty() || nume_.isBlank()) {
+            throw new ExceptieNavaDeRazboi("Nava trebuie sa aiba un nume!");
         }
         else {
-            System.out.println("Locatia trebuie sa fie de tip <Locatie>!");
+            setNume(nume_);
         }
 
-        for(Capitan c: capitani_) {
-            if(!(c instanceof Capitan)) {
-                System.out.println("Elementul " + c + " nu este de tip <Capitan>!");
-                validare = false;
-            }
-            if(!validare) {
-                break;
-            }
-        }
+        setLocatie(locatie_);
 
-        if(validare) {
+        if(!capitani_.isEmpty()) {
             setCapitani(capitani_);
+        }
+        else {
+            throw new ExceptieNavaDeRazboi("Lista trebuie sa contina cel putin un obiect de tip Capitan!");
         }
     }
 
-    void setNume(String valoare) {
+    public void setNume(String valoare) {
         nume = valoare;
     }
 
@@ -42,7 +35,7 @@ public class NavaDeRazboi {
         return nume;
     }
 
-    void setLocatie(Locatie valoare) {
+    public void setLocatie(Locatie valoare) {
         locatie = valoare;
     }
 
@@ -50,7 +43,7 @@ public class NavaDeRazboi {
         return locatie;
     }
 
-    void setCapitani(List<Capitan> valoare) {
+    public void setCapitani(List<Capitan> valoare) {
         capitani = valoare;
     }
 

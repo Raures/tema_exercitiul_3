@@ -1,27 +1,28 @@
 package obiecte;
+import exceptii.ExceptieLocatie;
 
 public class Locatie {
 
-    double latitudine; // -90 - 90
-    double longitudine; // -180 - 180
+    double latitudine; // Valori acceptate (-90, 90).
+    double longitudine; // Valori acceptate (-180, 180).
 
-    public Locatie(double latitudine_, double longitudine_) {
-        if(latitudine_ > -90 || latitudine_ < 90)  {
+    public Locatie(double latitudine_, double longitudine_) throws ExceptieLocatie {
+        if(latitudine_ < -90 || latitudine_ > 90)  {
+            throw new ExceptieLocatie("Latitudinea trebuie sa fie intre -90 si 90, nu " + latitudine_ + "!");
+        }
+        else {
             setLatitudine(latitudine_);
         }
-        else {
-            System.out.println("Latitudinea trebuie sa fie intre (-90; 90)!");
-        }
 
-        if(longitudine_ > -180 || longitudine_ < 180) {
-            setLongitudine(longitudine_);
+        if(longitudine_ < -180 || longitudine_ > 180) {
+            throw new ExceptieLocatie("Longitudinea trebuie sa fie intre -180 si 180, nu " + longitudine_ + "!");
         }
         else {
-            System.out.println("Longitudinea trebuie sa fie intre (-180; 180)!");
+            setLongitudine(longitudine_);
         }
     }
 
-    void setLatitudine(double valoare) {
+    public void setLatitudine(double valoare) {
         latitudine = valoare;
     }
 
@@ -29,7 +30,7 @@ public class Locatie {
         return latitudine;
     }
 
-    void setLongitudine(double valoare) {
+    public void setLongitudine(double valoare) {
         longitudine = valoare;
     }
 
